@@ -1,43 +1,112 @@
 const swaggerDocument = {
     swagger: '2.0',
     info: {
-        title: 'Projet CRTP API',
-        description: 'Projet CRTP API',
+        title: 'Projet 3 API',
+        description: 'Projet 3 API',
         contact: {
-            name: 'Francis Mak Yao Hermann'
+            name: 'Francis Jad Khoa Mathieu'
         },
         servers: ['http://localhost:3000']
     },
     tags: [
         { name: 'Authentification' },
-        { name: 'Personnes' },
-        { name: 'IPPE' },
+        { name: 'User' },
+        { name: 'Shows' },
+        { name: 'Seasons'},
+        { name: 'Episodes'},
+        { name: 'Comments'},
+        { name: 'History'},
+        { name: 'Favorites'},
     ],
     paths: {
-        "/connexion": {
-            post: {
+        "/auth/login": {
+            "post": {
                 tags: ["Authentification"],
                 summary: "Authentification",
                 description: "Authentification",
                 parameters: [
                     {
-                        name: "personne",
+                        name: "login",
                         in: "body",
-                        description: "Les nouvelles donnees de la personne",
                         schema: {
                             type: "object",
                             properties: {
-                                identifiant: {
+                                email: {
                                     type: "string",
-                                    example: "teacher"
+                                    example: "e12345678@cmaisonneuve.qc.ca"
                                 },
-                                motDePasse: {
+                                password: {
+                                    type: "string",
+                                    example: "password"
+                                }
+                            }
+                        }
+                    }
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                success: {
+                                    type: "boolean",
+                                    example: "true"
+                                },
+                                token: {
+                                    type: "string",
+                                    example: "ABCTOKEN"
+                                },
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                succes: {
+                                    type: "boolean",
+                                    example: "false"
+                                },
+                                message: {
+                                    type: "string",
+                                    example: "email ou mot de passe incorrect!"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+
+
+            }
+        },
+        "/auth/register": {
+            "post": {
+                tags: ["Authentification"],
+                summary: "Authentification",
+                description: "Authentification",
+                parameters: [
+                    {
+                        name: "register",
+                        in: "body",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                email: {
+                                    type: "string",
+                                    example: "e12345678@cmaisonneuve.qc.ca"
+                                },
+                                password: {
                                     type: "string",
                                     example: "password"
                                 },
-                                etudiant: {
-                                    type: "boolean",
-                                    example: "false"
+                                username: {
+                                    type: "string",
+                                    example: "username"
                                 }
                             }
                         }
@@ -57,38 +126,6 @@ const swaggerDocument = {
                                     type: "string",
                                     example: "ABCTOKEN"
                                 },
-                                expiration: {
-                                    type: "string",
-                                    example: "4h"
-                                },
-                                identifiant: {
-                                    type: "string",
-                                    example: "teacher"
-                                },
-                                Etudiant: {
-                                    type: "boolean",
-                                    example: "false"
-                                },
-                                NomFamille: {
-                                    type: "string",
-                                    example: "Teacher"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        description: "Unauthorized",
-                        schema: {
-                            type: "object",
-                            properties: {
-                                succes: {
-                                    type: "boolean",
-                                    example: "false"
-                                },
-                                message: {
-                                    type: "string",
-                                    example: "Matricule ou mot de passe incorrect!"
-                                }
                             }
                         }
                     },
