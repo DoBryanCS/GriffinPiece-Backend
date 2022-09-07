@@ -113,7 +113,7 @@ const swaggerDocument = {
                     }
                 ],
                 responses: {
-                    "200": {
+                    "201": {
                         description: "successful operation",
                         schema: {
                             type: "object",
@@ -137,26 +137,51 @@ const swaggerDocument = {
 
             }
         },
-        "/personnes": {
-            "get": {
-                tags: ['Personnes'],
-                description: "Retourne toutes les personnes",
-                responses: {
-                    "200": {          
-                        description: "Une liste des personnes",
-                        schema : {
+        "/user/{Id}": {
+            "put": {
+                tags: ['User'],
+                description: "Permet de update un user",
+                parameters: [
+                    {
+                        name: "Id",
+                        in: "path",
+                        description: "Le id du user",
+                        required: true,
+                        type: "int",
+                        example: 3
+                    },
+                    {
+                        name: "newData",
+                        in: "body",
+                        schema: {
                             type: "object",
                             properties: {
-                                data: {
-                                    type: "array",
-                                    items: {
-                                        $ref: "#/definitions/PersonneDetail",
-                                    }
-                                },
-                                token: {
+                                email: {
                                     type: "string",
-                                    example: "null"
+                                    example: "e12345678@cmaisonneuve.qc.ca"
+                                },
+                                username: {
+                                    type: "string",
+                                    example: "username"
+                                },
+                                password: {
+                                    type: "string",
+                                    example: "password"
                                 }
+                            }
+                        }
+                    }
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                success: {
+                                    type: "boolean",
+                                    example: "true"
+                                },
                             }
                         }
                     },
@@ -188,6 +213,101 @@ const swaggerDocument = {
                                 message: {
                                     type: "string",
                                     example: "Vous n'avez pas les droits nécessaires!"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        description: "Not Found",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                succes: {
+                                    type: "boolean",
+                                    example: "false"
+                                },
+                                message: {
+                                    type: "string",
+                                    example: "User not found!"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                tags: ['User'],
+                description: "Permet de delete un user",
+                parameters: [
+                    {
+                        name: "Id",
+                        in: "path",
+                        description: "Le id du user",
+                        required: true,
+                        type: "int",
+                        example: 3
+                    }
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                success: {
+                                    type: "boolean",
+                                    example: "true"
+                                },
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                succes: {
+                                    type: "boolean",
+                                    example: "false"
+                                },
+                                message: {
+                                    type: "string",
+                                    example: "Vous n'avez pas les droits nécessaires!"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        description: "Forbidden",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                succes: {
+                                    type: "boolean",
+                                    example: "false"
+                                },
+                                message: {
+                                    type: "string",
+                                    example: "Vous n'avez pas les droits nécessaires!"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        description: "Not Found",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                succes: {
+                                    type: "boolean",
+                                    example: "false"
+                                },
+                                message: {
+                                    type: "string",
+                                    example: "User not found!"
                                 }
                             }
                         }
@@ -512,312 +632,86 @@ const swaggerDocument = {
         },
     },
     definitions: {
-        PersonneDetail: {
+        Episode: {
             type: "object",
             properties: {
-                IdPersonne: {
+                episodeId: {
                     type: "integer",
                     example: 3
                 },
-                TypePersonne: {
+                seasonId: {
+                    type: "integer",
+                    example: 1
+                },
+                showId: {
+                    type: "integer",
+                    example: 1
+                },
+                episodeNumber: {
+                    type: "integer",
+                    example: 1
+                },
+                title: {
                     type: "string",
-                    enum: [
-                        "Étudiant",
-                        "Enseignant",
-                        "Personnage",
-                        "Comédien"
-                    ]
+                    example: "I'm Luffy! The Man Who Will Become the Pirate King!"
                 },
-                NomFamille: {
+                length: { 
+                    type: "int",
+                    example: "20"
+                },
+                imageURL: {
                     type: "string",
-                    example: "Ducharme"
+                    example: "https://static.wikia.nocookie.net/onepiece/images/a/a1/Episode_1.png/revision/latest/scale-to-width-down/350?cb=20140915112845"
                 },
-                Prenom1: {
+                videoURL: {
                     type: "string",
-                    example: "Benoit"
-                },
-                Prenom2: {
-                    type: "string",
-                    example: ""
-                },
-                DateNaissance: {
-                    type: "string",
-                    example: "1975-08-31T00:00:00.000Z"
-                },
-                Masculin: {
-                    type: "boolean",
-                    example: true
-                },
-                Telephone: {
-                    type: "string",
-                    example: null
-                },
-                NoPermis: {
-                    type: "string",
-                    example: null
-                },
-                Adresse1: {
-                    type: "string",
-                    example: null
-                },
-                Adresse2: {
-                    type: "string",
-                    example: null
-                },
-                Ville: {
-                    type: "string",
-                    example: null
-                },
-                Province: {
-                    type: "string",
-                    example: null
-                },
-                CodePostal: {
-                    type: "string",
-                    example: null
-                },
-                Race: {
-                    type: "string",
-                    example: null
-                },
-                Taille: {
-                    type: "string",
-                    example: null
-                },
-                Yeux: {
-                    type: "string",
-                    example: null
-                },
-                Cheveux: {
-                    type: "string",
-                    example: null
-                },
-                Marques: {
-                    type: "string",
-                    example: null
-                },
-                Toxicomanie: {
-                    type: "boolean",
-                    example: null
-                },
-                Desorganise: {
-                    type: "boolean",
-                    example: null
-                },
-                Depressif: {
-                    type: "boolean",
-                    example: null
-                },
-                Suicidaire: {
-                    type: "boolean",
-                    example: null
-                },
-                Violent: {
-                    type: "boolean",
-                    example: null
-                },
-                Gilet: {
-                    type: "string",
-                    example: null
-                },
-                Pantalon: {
-                    type: "string",
-                    example: null
-                },
-                AutreVetement: {
-                    type: "string",
-                    example: null
+                    example: "https://www.google.com"
                 },
             }
         },
-        IppeDetail: {
+        Season: {
             type: "object",
             properties: {
-
-                Id: {
-                    type: "array",
-                    items: {
-                        type: "integer",
-                        example: [3,2,null]
-                    }
-                },
-                NomFamille: {
-                    type: "string",
-                    example: "Ducharme"
-                },
-                Prenom1: {
-                    type: "string",
-                    example: "Benoit"
-                },
-                Prenom2: {
-                    type: "string",
-                    example: ""
-                },
-                Masculin: {
-                    type: "boolean",
-                    example: true
-                },
-                DateNaissance: {
-                    type: "string",
-                    example: "1975-08-31"
-                },
-                Telephone: {
-                    type: "string",
-                    example: null
-                },
-                NoPermis: {
-                    type: "string",
-                    example: null
-                },
-                Adresse1: {
-                    type: "string",
-                    example: null
-                },
-                Adresse2: {
-                    type: "string",
-                    example: null
-                },
-                Ville: {
-                    type: "string",
-                    example: null
-                },
-                Province: {
-                    type: "string",
-                    example: null
-                },
-                CodePostal: {
-                    type: "string",
-                    example: null
-                },
-                Race: {
-                    type: "string",
-                    example: null
-                },
-                Taille: {
-                    type: "string",
-                    example: null
-                },
-                Yeux: {
-                    type: "string",
-                    example: null
-                },
-                Cheveux: {
-                    type: "string",
-                    example: null
-                },
-                Marques: {
-                    type: "string",
-                    example: null
-                },
-                Toxicomanie: {
-                    type: "boolean",
-                    example: null
-                },
-                Desorganise: {
-                    type: "boolean",
-                    example: null
-                },
-                Depressif: {
-                    type: "boolean",
-                    example: null
-                },
-                Suicidaire: {
-                    type: "boolean",
-                    example: null
-                },
-                Violent: {
-                    type: "boolean",
-                    example: null
-                },
-                Gilet: {
-                    type: "string",
-                    example: null
-                },
-                Pantalon: {
-                    type: "string",
-                    example: null
-                },
-                AutreVetement: {
-                    type: "string",
-                    example: null
-                },
-                Categorie: {
-                    type: "string",
-                    enum: [
-                        "Étudiant",
-                        "Enseignant",
-                        "Personnage",
-                        "Comédien"
-                    ]
-                },
-                IdPersonne: {
+                seasonId: {
                     type: "integer",
-                    example: 3
+                    example: 1
                 },
-                NoEvenement: {
-                    type: "string",
-                    example: "108-220208-0031"
-                },
-                TypeEvenement: {
-                    type: "string",
-                    enum: [
-                        "Recherché",
-                        "Enquête",
-                        "Découverte",
-                        "Autre"
-                    ]
-                },
-                Raison: {
-                    type: "string",
-                    example: "Arrestation"
-                },
-                DossierEnquete: {
-                    type: "string",
-                    example: null
-                },
-                Cour: {
-                    type: "string",
-                    example: "Municipale de Longueuil"
-                },
-                NoCour: {
-                    type: "string",
-                    example: "CM-LGL-A-26840"
-                },
-                NatureCrime: {
-                    type: "string",
-                    example: "Agression armée"
-                },
-                LieuDetention: {
-                    type: "string",
-                    example: null
-                },
-                FinSentence: {
-                    type: "string",
-                    example: null
-                },
-                VuDerniereFois: {
-                    type: "string",
-                    example: null
-                },
-                Agent: {
-                    type: "string",
-                    example: null
-                },
-                Poste: {
-                    type: "string",
-                    example: null
-                },
-                IdIPPE: {
+                showId: {
                     type: "integer",
-                    example: null
+                    example: 1
                 },
-                Libelle: {
+                title: {
                     type: "string",
-                    example: null
+                    example: "East Blue"
                 },
-            },
+                imageURL: {
+                    type: "string",
+                    example: "https://m.media-amazon.com/images/M/MV5BZDQwMTYzN2EtNmFlOS00OTI1LWE5YmEtOTIyNGQwZjNiY2ZlXkEyXkFqcGdeQXVyMTEyNTc4NTI1._V1_.jpg"
+                },
+            }
         },
-    },
+        Show: {
+            type: "object",
+            properties: {
+                showId: {
+                    type: "integer",
+                    example: 1
+                },
+                title: {
+                    type: "string",
+                    example: "East Blue"
+                },
+                description: {
+                    type: "string",
+                    example: "A man wants to become the pirate king"
+                },
+                imageURL: {
+                    type: "string",
+                    example: "https://images.justwatch.com/poster/248497985/s718/one-piece.%7Bformat%7D"
+                },
+            }
+        },
+    }
 };
 
 module.exports = swaggerDocument;
