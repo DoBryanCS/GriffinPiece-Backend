@@ -1,5 +1,5 @@
 const swaggerDocument = {
-    swagger: '2.0',
+    openapi: '3.0.0',
     info: {
         title: 'Projet 3 API',
         description: 'Projet 3 API',
@@ -22,7 +22,7 @@ const swaggerDocument = {
         "/auth/login": {
             "post": {
                 tags: ["Authentification"],
-                summary: "Authentification",
+                summary: "Get Token",
                 description: "Authentification",
                 parameters: [
                     {
@@ -87,7 +87,7 @@ const swaggerDocument = {
         "/auth/register": {
             "post": {
                 tags: ["Authentification"],
-                summary: "Authentification",
+                summary: "Create User",
                 description: "Authentification",
                 parameters: [
                     {
@@ -137,19 +137,17 @@ const swaggerDocument = {
 
             }
         },
-        "/user/{Id}": {
+        "/user": {
             "put": {
                 tags: ['User'],
+                summary: "Update current User",
                 description: "Permet de update un user",
-                parameters: [
+                security: [
                     {
-                        name: "Id",
-                        in: "path",
-                        description: "Le id du user",
-                        required: true,
-                        type: "int",
-                        example: 3
-                    },
+                        bearerAuth: []
+                    }
+                ],
+                parameters: [
                     {
                         name: "newData",
                         in: "body",
@@ -196,23 +194,7 @@ const swaggerDocument = {
                                 },
                                 message: {
                                     type: "string",
-                                    example: "Vous n'avez pas les droits nécessaires!"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        description: "Forbidden",
-                        schema: {
-                            type: "object",
-                            properties: {
-                                succes: {
-                                    type: "boolean",
-                                    example: "false"
-                                },
-                                message: {
-                                    type: "string",
-                                    example: "Vous n'avez pas les droits nécessaires!"
+                                    example: "Vous n'etes pas connecter!"
                                 }
                             }
                         }
@@ -238,9 +220,17 @@ const swaggerDocument = {
                     }
                 }
             },
+        },
+        "/user/{Id}": {
             "delete": {
                 tags: ['User'],
+                summary: "Delete User from Id",
                 description: "Permet de delete un user",
+                security: [
+                    {
+                        bearerAuth: []
+                    }
+                ],
                 parameters: [
                     {
                         name: "Id",
@@ -275,7 +265,7 @@ const swaggerDocument = {
                                 },
                                 message: {
                                     type: "string",
-                                    example: "Vous n'avez pas les droits nécessaires!"
+                                    example: "Vous n'etes pas connecter!"
                                 }
                             }
                         }
@@ -631,86 +621,103 @@ const swaggerDocument = {
             }
         },
     },
-    definitions: {
-        Episode: {
-            type: "object",
-            properties: {
-                episodeId: {
-                    type: "integer",
-                    example: 3
-                },
-                seasonId: {
-                    type: "integer",
-                    example: 1
-                },
-                showId: {
-                    type: "integer",
-                    example: 1
-                },
-                episodeNumber: {
-                    type: "integer",
-                    example: 1
-                },
-                title: {
-                    type: "string",
-                    example: "I'm Luffy! The Man Who Will Become the Pirate King!"
-                },
-                length: { 
-                    type: "int",
-                    example: "20"
-                },
-                imageURL: {
-                    type: "string",
-                    example: "https://static.wikia.nocookie.net/onepiece/images/a/a1/Episode_1.png/revision/latest/scale-to-width-down/350?cb=20140915112845"
-                },
-                videoURL: {
-                    type: "string",
-                    example: "https://www.google.com"
-                },
+    /**
+     * components:
+    securitySchemes:
+     bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+     */
+    components: {
+        securitySchemes: {
+            bearerAuth: {
+                type: "http",
+                scheme: "bearer",
+                bearerFormat: "JWT"
             }
         },
-        Season: {
-            type: "object",
-            properties: {
-                seasonId: {
-                    type: "integer",
-                    example: 1
-                },
-                showId: {
-                    type: "integer",
-                    example: 1
-                },
-                title: {
-                    type: "string",
-                    example: "East Blue"
-                },
-                imageURL: {
-                    type: "string",
-                    example: "https://m.media-amazon.com/images/M/MV5BZDQwMTYzN2EtNmFlOS00OTI1LWE5YmEtOTIyNGQwZjNiY2ZlXkEyXkFqcGdeQXVyMTEyNTc4NTI1._V1_.jpg"
-                },
-            }
-        },
-        Show: {
-            type: "object",
-            properties: {
-                showId: {
-                    type: "integer",
-                    example: 1
-                },
-                title: {
-                    type: "string",
-                    example: "East Blue"
-                },
-                description: {
-                    type: "string",
-                    example: "A man wants to become the pirate king"
-                },
-                imageURL: {
-                    type: "string",
-                    example: "https://images.justwatch.com/poster/248497985/s718/one-piece.%7Bformat%7D"
-                },
-            }
-        },
+        schemas: {
+            Episode: {
+                type: "object",
+                properties: {
+                    episodeId: {
+                        type: "integer",
+                        example: 3
+                    },
+                    seasonId: {
+                        type: "integer",
+                        example: 1
+                    },
+                    showId: {
+                        type: "integer",
+                        example: 1
+                    },
+                    episodeNumber: {
+                        type: "integer",
+                        example: 1
+                    },
+                    title: {
+                        type: "string",
+                        example: "I'm Luffy! The Man Who Will Become the Pirate King!"
+                    },
+                    length: { 
+                        type: "int",
+                        example: "20"
+                    },
+                    imageURL: {
+                        type: "string",
+                        example: "https://static.wikia.nocookie.net/onepiece/images/a/a1/Episode_1.png/revision/latest/scale-to-width-down/350?cb=20140915112845"
+                    },
+                    videoURL: {
+                        type: "string",
+                        example: "https://www.google.com"
+                    },
+                }
+            },
+            Season: {
+                type: "object",
+                properties: {
+                    seasonId: {
+                        type: "integer",
+                        example: 1
+                    },
+                    showId: {
+                        type: "integer",
+                        example: 1
+                    },
+                    title: {
+                        type: "string",
+                        example: "East Blue"
+                    },
+                    imageURL: {
+                        type: "string",
+                        example: "https://m.media-amazon.com/images/M/MV5BZDQwMTYzN2EtNmFlOS00OTI1LWE5YmEtOTIyNGQwZjNiY2ZlXkEyXkFqcGdeQXVyMTEyNTc4NTI1._V1_.jpg"
+                    },
+                }
+            },
+            Show: {
+                type: "object",
+                properties: {
+                    showId: {
+                        type: "integer",
+                        example: 1
+                    },
+                    title: {
+                        type: "string",
+                        example: "East Blue"
+                    },
+                    description: {
+                        type: "string",
+                        example: "A man wants to become the pirate king"
+                    },
+                    imageURL: {
+                        type: "string",
+                        example: "https://images.justwatch.com/poster/248497985/s718/one-piece.%7Bformat%7D"
+                    },
+                }
+            },
+        }
     }
 };
 
