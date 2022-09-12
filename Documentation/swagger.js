@@ -522,16 +522,11 @@ const swaggerDocument = {
                 }
             },
         },
-        "/shows/{id}": {
+        "/show/{id}": {
             "get": {
                 tags: ["Shows"],
-                summary: "Get Show",
+                summary: "Get One show using it's ID",
                 description: "Allows to get the info of a show",
-                security: [
-                    {
-                        bearerAuth: []
-                    }
-                ],
                 parameters: [
                     {
                         name: "Id",
@@ -575,16 +570,52 @@ const swaggerDocument = {
                 }
             }
         },
+        "/shows": {
+            "get": {
+                tags: ["Shows"],
+                summary: "Get all shows",
+                description: "Allows to get every show",
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "array",
+                                    items: {
+                                        $ref: "#/components/schemas/Show"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                succes: {
+                                    type: "boolean",
+                                    example: "false"
+                                },
+                                message: {
+                                    type: "string",
+                                    example: "Vous deviez vous connecter"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            }
+        },
         "/season/{id}": {
             "get": {
                 tags: ["Seasons"],
                 summary: "Get seasons",
                 description: "Allows to get the info of a season",
-                security: [
-                    {
-                        bearerAuth: []
-                    }
-                ],
                 parameters: [
                     {
                         name: "Id",
