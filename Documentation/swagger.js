@@ -681,6 +681,33 @@ const swaggerDocument = {
                 }
             }
         },
+        "/history": {
+            "get": {
+                tags: ["History"],
+                summary: "Get history",
+                description: "Get the history of the user",
+                security: [
+                    {
+                        bearerAuth: []
+                    },
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "array",
+                                    items: {
+                                        $ref: "#/components/schemas/History"
+                                    },
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     },
     components: {
         securitySchemes: {
@@ -788,6 +815,23 @@ const swaggerDocument = {
                     content: {
                         type: "string",
                         example: "J'ai adoré cet épisode!"
+                    },
+                }
+            },
+            History: {
+                type: "object",
+                properties: {
+                    historyId: {
+                        type: "integer",
+                        example: 1
+                    },
+                    episodeId: {
+                        type: "integer",
+                        example: 1
+                    },
+                    time: {
+                        type: "string",
+                        example: "2021-05-05 12:00:00"
                     },
                 }
             }
