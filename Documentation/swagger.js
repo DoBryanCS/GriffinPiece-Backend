@@ -308,6 +308,220 @@ const swaggerDocument = {
                 }
             }
         },
+        "/comment/{episodeId}": {
+            "post": {
+                tags: ['Comments'],
+                summary: "Create Comment",
+                description: "Permet de creer un commentaire",
+                security: [
+                    {
+                        bearerAuth: []
+                    }
+                ],
+                parameters: [
+                    {
+                        name: "episodeId",
+                        in: "path",
+                        description: "Le id de l'episode",
+                        required: true,
+                        type: "int",
+                        example: 3
+                    },
+                    {
+                        name: "comment",
+                        in: "body",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                comment: {
+                                    type: "string",
+                                    example: "Among us Fong us One Piece"
+                                }
+                            }
+                        }
+                    },
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+                                    properties: {
+                                        success: {
+                                            type: "boolean",
+                                            example: "true"
+                                        },
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+                                    properties: {
+                                        succes: {
+                                            type: "boolean",
+                                            example: "false"
+                                        },
+                                        message: {
+                                            type: "string",
+                                            example: "Vous n'etes pas connecter!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        description: "Forbidden",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+                                    properties: {
+                                        succes: {
+                                            type: "boolean",
+                                            example: "false"
+                                        },
+                                        message: {
+                                            type: "string",
+                                            example: "Vous n'avez pas les droits nécessaires!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        description: "Not Found",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+                                    properties: {
+                                        succes: {
+                                            type: "boolean",
+                                            example: "false"
+                                        },
+                                        message: {
+                                            type: "string",
+                                            example: "User not found!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            },
+            "get": {
+                tags: ['Comments'],
+                summary: "Get all Comment from episodeId",
+                description: "Permet de load des commentaire de un episode",
+                security: [
+                    {
+                        bearerAuth: []
+                    }
+                ],
+                parameters: [
+                    {
+                        name: "episodeId",
+                        in: "path",
+                        description: "Le id de l'episode",
+                        required: true,
+                        type: "int",
+                        example: 3
+                    }
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "array",
+                                    items: {
+                                        $ref: "#/components/schemas/Comment"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+                                    properties: {
+                                        succes: {
+                                            type: "boolean",
+                                            example: "false"
+                                        },
+                                        message: {
+                                            type: "string",
+                                            example: "Vous n'etes pas connecter!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        description: "Forbidden",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+                                    properties: {
+                                        succes: {
+                                            type: "boolean",
+                                            example: "false"
+                                        },
+                                        message: {
+                                            type: "string",
+                                            example: "Vous n'avez pas les droits nécessaires!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        description: "Not Found",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+                                    properties: {
+                                        succes: {
+                                            type: "boolean",
+                                            example: "false"
+                                        },
+                                        message: {
+                                            type: "string",
+                                            example: "User not found!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            },
+        },
     },
     components: {
         securitySchemes: {
@@ -397,6 +611,27 @@ const swaggerDocument = {
                     },
                 }
             },
+            Comment:{
+                type: "object",
+                properties: {
+                    commentId: {
+                        type: "integer",
+                        example: 1
+                    },
+                    episodeId: {
+                        type: "integer",
+                        example: 1
+                    },
+                    userId: {
+                        type: "integer",
+                        example: 1
+                    },
+                    content: {
+                        type: "string",
+                        example: "J'ai adoré cet épisode!"
+                    },
+                }
+            }
         }
     }
 };
