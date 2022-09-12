@@ -522,6 +522,165 @@ const swaggerDocument = {
                 }
             },
         },
+        "/shows/{id}": {
+            "get": {
+                tags: ["Shows"],
+                summary: "Get Show",
+                description: "Allows to get the info of a show",
+                security: [
+                    {
+                        bearerAuth: []
+                    }
+                ],
+                parameters: [
+                    {
+                        name: "Id",
+                        in: "path",
+                        description: "Le id du show",
+                        required: true,
+                        type: "int",
+                        example: 7
+                    }
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/Show"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                succes: {
+                                    type: "boolean",
+                                    example: "false"
+                                },
+                                message: {
+                                    type: "string",
+                                    example: "Vous deviez vous connecter"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/season/{id}": {
+            "get": {
+                tags: ["Seasons"],
+                summary: "Get seasons",
+                description: "Allows to get the info of a season",
+                security: [
+                    {
+                        bearerAuth: []
+                    }
+                ],
+                parameters: [
+                    {
+                        name: "Id",
+                        in: "path",
+                        description: "Le id de la season",
+                        required: true,
+                        type: "int",
+                        example: 4
+                    }
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/Season"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                succes: {
+                                    type: "boolean",
+                                    example: "false"
+                                },
+                                message: {
+                                    type: "string",
+                                    example: "Vous deviez vous connecter"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/episode/{id}": {
+            "get": {
+                tags: ["Episodes"],
+                summary: "Get seasons",
+                description: "Allows to get the info of a episode",
+                security: [
+                    {
+                        bearerAuth: []
+                    }
+                ],
+                parameters: [
+                    {
+                        name: "Id",
+                        in: "path",
+                        description: "Le id de l'episode",
+                        required: true,
+                        type: "int",
+                        example: 4
+                    }
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/Episode"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        schema: {
+                            type: "object",
+                            properties: {
+                                succes: {
+                                    type: "boolean",
+                                    example: "false"
+                                },
+                                message: {
+                                    type: "string",
+                                    example: "Vous deviez vous connecter"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            }
+        },
     },
     components: {
         securitySchemes: {
