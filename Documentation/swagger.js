@@ -631,8 +631,8 @@ const swaggerDocument = {
         "/episode/{id}": {
             "get": {
                 tags: ["Episodes"],
-                summary: "Get seasons",
-                description: "Allows to get the info of a episode",
+                summary: "Get episodes",
+                description: "Allows to get the episode",
                 security: [
                     {
                         bearerAuth: []
