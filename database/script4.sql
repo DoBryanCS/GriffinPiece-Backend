@@ -9,11 +9,11 @@ drop table if exists comments;
 
 create table shows (
     id integer IDENTITY(1,1) PRIMARY KEY,
-    title text not null,
-    description text not null,
-    imageUrl text not null,
-    releaseDate text not null,
-    genre text not null,
+    title nvarchar(75) not null,
+    description nvarchar(2000) not null,
+    imageUrl nvarchar(500) not null,
+    releaseDate nvarchar(20) not null,
+    genre nvarchar(50) not null,
     rating integer not null
 );
 
@@ -21,10 +21,10 @@ create table shows (
 create table seasons (
     id integer IDENTITY(1,1) PRIMARY KEY,
     showId integer not null,
-    title text not null,
-    description text not null,
-    imageUrl text not null,
-    releaseDate text not null,
+    title nvarchar(75) not null,
+    description nvarchar(2000) not null,
+    imageUrl nvarchar(500) not null,
+    releaseDate nvarchar(20) not null,
     foreign key (showId) references shows(id)
 );
 
@@ -32,19 +32,19 @@ create table seasons (
 create table episodes (
     id integer IDENTITY(1,1) PRIMARY KEY,
     seasonId integer not null,
-    title text not null,
+    title nvarchar(75) not null,
     episodeNumber integer not null,
     length integer,
-    imageUrl text not null,
-    videoUrl text not null,
+    imageUrl nvarchar(500) not null,
+    videoUrl nvarchar(500) not null,
     foreign key (seasonId) references seasons(id)
 );
 
 create table users (
     id integer IDENTITY(1,1) PRIMARY KEY,
-    username text not null,
-    password text not null,
-    email text not null,
+    username nvarchar(50) not null,
+    password nvarchar(255) not null,
+    email nvarchar(50) not null,
     isAdmin integer not null
 );
 
@@ -68,7 +68,7 @@ create table comments (
     id integer IDENTITY(1,1) PRIMARY KEY,
     userId integer not null,
     episodeId integer not null,
-    comment text not null,
+    comment nvarchar(255) not null,
     foreign key (userId) references users(id),
     foreign key (episodeId) references episodes(id)
 );

@@ -46,17 +46,11 @@ const swaggerDocument = {
                 responses: {
                     "200": {
                         description: "successful operation",
-                        schema: {
-                            type: "object",
-                            properties: {
-                                success: {
-                                    type: "boolean",
-                                    example: "true"
-                                },
-                                token: {
-                                    type: "string",
-                                    example: "ABCTOKEN"
-                                },
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/LoginResponse"
+                                }
                             }
                         }
                     },
@@ -863,6 +857,23 @@ const swaggerDocument = {
                     time: {
                         type: "string",
                         example: "2021-05-05 12:00:00"
+                    },
+                }
+            },
+            LoginResponse: {
+                type: "object",
+                properties: {
+                    succes: {
+                        type: "boolean",
+                        example: "true"
+                    },
+                    token: {
+                        type: "string",
+                        example: "ABCTOKEN"
+                    },
+                    username: {
+                        type: "string",
+                        example: "Drunkudan"
                     },
                 }
             }
