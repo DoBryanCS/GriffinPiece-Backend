@@ -104,6 +104,9 @@ insert into comments (userId, episodeId, comment) values (1, 1, 'This is a comme
 insert into favorite (userId, showId) values (1, 1);
 
 
+insert into history (userId, episodeId, date) values (1, 2, '03/10/2022');
+
+
 -- MATHIEU
 insert into shows (title, description, imageUrl, releaseDate, genre, rating) values ('Cyberpunk: Edgerunners', 'In a dystopia overrun by corruption, crime, and cybernetic implants, an impulsive but talented street kid, after losing everything he has in a drive-by shooting, makes the choice to survive on the wrong side of the law as an edgerunner; a high-tech, black-market mercenary also known as a "cyberpunk".', 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/Cyberpunk_Edgerunners_poster.jpg/250px-Cyberpunk_Edgerunners_poster.jpg', '2022', 'Action', 4);
 insert into shows (title, description, imageUrl, releaseDate, genre, rating) values ('Made in Abyss', 'An orphaned girl named Riko lives in the Belchero Orphanage in the town of Orth. The town surrounds a strange, giant hole descending deep into the earth, which is known as the Abyss. The Abyss harbors artifacts and remnants of civilizations long gone, and is, therefore, a popular hunting spot for so-called Cave Raiders, who undertake arduous and dangerous descents into the mist-filled pit to recover whatever relics they can find. Returning from the Abyss can be dangerous as "the Curse of the Abyss," a mysterious and potentially fatal malady, manifests upon ascension. The deeper one goes, the more acute the effects of the curseelcome him into their close-knit group. Sometime later, a number of findings are made from the depths of the Abyss, including Lyza’s White Whistle and pages of discoveries and observations she had made, as well as a message presumably for Riko, stating she is waiting at the bottom of the Abyss. Riko, determined to find her mother, bids farewell to her friends and secretly departs into the Abyss with Reg as her companion.', 'https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Made_in_Abyss_volume_1_cover.jpg/220px-Made_in_Abyss_volume_1_cover.jpg', '2017', 'Dark Fantasy', 4);
@@ -124,6 +127,63 @@ values
 (6, 'High School DXD Hero', 'After rescuing his master, Rias Gremory, from the Dimensional Gap, Red Dragon Emperor and aspiring Harem King Issei Hyoudou can finally return to his high school activities alongside fellow members of the Occult Research Club: Yuuto Kiba, Asia Argento, Xenovia Quarta, and Irina Shidou.', 'https://static.bunnycdn.ru/i/cache/images/2018/04/edf05babdf70b0ffef897d2cd530c9f1.jpg', '2018');
 
 
+-- Cyberpunk Queries
+INSERT INTO episodes (seasonId, title, episodeNumber, length, imageUrl, videoUrl) VALUES 
+(4, 'Let You Down', 1, 23, 'https://wallpapercave.com/wp/wp11495496.jpg', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(4, 'Like A Boy', 2, 23, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYFDh4GCwYXrq_Oim0w7y-cv4w6SyxJreSVA&usqp=CAU', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(4, 'Smooth Criminal', 3, 23, 'https://www.svg.com/img/gallery/things-are-getting-worse-for-cyberpunk-2077/intro-1607611901.jpg','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB' ),
+(4, 'Lucky You', 4, 23, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbTaVLpXapRdpCnulxI3XWONO2fRjfQ8SBbw&usqp=CAU','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB')
+
+
+
+-- Made in Abyss
+INSERT INTO episodes (seasonId, title, episodeNumber, length, imageUrl, videoUrl) VALUES 
+(5,'The City of the Great Pit', 1, 23, 'https://cdn.myanimelist.net/images/anime/1864/122519.jpg', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(5,'Resurrection Festival', 2, 23, 'https://images.randomhouse.com/cover/9781638587170', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(5,'Departure', 3, 23, 'https://manga.tokyo/wp-content/uploads/2017/08/MADE-IN-ABYSS-2.jpg', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(5,'The Edge of the Abyss', 4, 23, 'https://www.themoviedb.org/t/p/w500/fsPZdpocYYbvDS2YEE1Xohqo1ni.jpg', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(6,'The Compass Pointed to the Darkness', 1, 23, 'https://cdn.myanimelist.net/images/characters/10/350283.jpg', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(6,'Capital of the Unreturned', 2, 23, 'https://preview.redd.it/tpt9esmczd251.jpg?auto=webp&s=02880d242df5335a3af2bb0a3bd816d1fd338072', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(6,'Village of the Hollows', 3, 23, 'https://admintoytopia.toytopia.co.th/data/img/shop1/product/product61091_800.jpg', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(6,'Friend', 4, 23, 'https://i.pinimg.com/236x/7b/33/40/7b334035e1125ede035a2f85a4349eeb.jpg', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB')
+
+
+
+-- Dororo (2019)
+INSERT INTO episodes (seasonId, title, episodeNumber, length, imageUrl, videoUrl) VALUES 
+(7, 'The Story of Daigo', 1, 23, 'https://static.wikia.nocookie.net/dororo/images/0/0c/Dororo_anime_design_2019.png/revision/latest?cb=20190126180301','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(7, 'The Story of Bandai', 2, 23, 'https://honeysanime.com/wp-content/uploads/2019/05/dororo-dvd-300x424.jpg','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(7, 'The Story of Jukai', 3, 23, 'https://track2traininginstitute.files.wordpress.com/2022/02/dororo-lyrics.jpg?w=460','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(7, 'The Story of the Cursed Sword', 4, 23, 'https://cdn.shopify.com/s/files/1/0038/1245/8565/products/5b214c48686b0a8b6bed516af02bd71b_906da744-5a56-48ee-8bef-f270fc62f710_300x.jpg?v=1655944905','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB')
+
+-- Vinland Saga
+INSERT INTO episodes (seasonId, title, episodeNumber, length, imageUrl, videoUrl) VALUES 
+(8,'Somewhere Not Here', 1, 23, 'https://cdn.myanimelist.net/images/anime/1500/103005.jpg', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(8,'Sword', 2, 23, 'https://static.wikia.nocookie.net/villains/images/3/3c/Askel.png/revision/latest?cb=20201115175755', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(8,'Troll', 3, 23, 'https://upload.wikimedia.org/wikipedia/en/thumb/7/79/Thorfinnnvolumefirst.png/220px-Thorfinnnvolumefirst.png', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(8,'A True Warrior', 4, 23, 'https://static.wikia.nocookie.net/vinlandsaga/images/a/ab/Thors_anime_design.png/revision/latest/scale-to-width-down/250?cb=20190525082630', 'https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB')
+
+
+-- HighSchool DxD
+INSERT INTO episodes (seasonId, title, episodeNumber, length, imageUrl, videoUrl) VALUES 
+(9,'I Got a Girlfriend!', 1, 23, 'https://www.themoviedb.org/t/p/original/254UOvzBHnue5HA26FpfNalCszd.jpg','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(9,'I Quit Being Human!', 2, 23, 'https://images2.vudu.com/poster2/478985-338','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(9,'I Got a Friend!', 3, 23, 'https://i1.sndcdn.com/artworks-a97bKtSqgVNU2sM9-0enDuQ-t500x500.jpg','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(9,'I Am Saving My Friend!', 4, 23, 'https://cdn2.ezcosplay.com/media/catalog/product/2/7/2785340_1630635618_1.jpg','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(10,'Another Disquieting Premonition!', 1, 23, 'https://static.displate.com/280x392/displate/2020-03-23/8493fc330a9e687ab927c8d8293a1297_d1dcac5538f15ba4b9da5e9eaa124f0c.jpg','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(10,'The Holy Sword Is Here!', 2, 23, 'https://cdn.myanimelist.net/images/anime/1331/111940.jpg','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(10,'I Will Destroy the Holy Sword!', 3, 23, 'https://animefigureszone.com/wp-content/uploads/2020/05/High-School-DxD-HERO-Akeno-Himejima-Scale-Figure-001.jpg','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(10,'A Strong Enemy Appeared!', 4, 23, 'https://static.wikia.nocookie.net/among-us-wiki/images/3/31/Red.png/revision/latest?cb=20211122214947','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(11,'Summer Break! Off to the Underworld!', 1, 23, 'https://i.imgflip.com/62mqzr.jpg','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(11,'Young Devils Gather', 2, 23, 'https://i.imgflip.com/5op65z.jpg','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(11,'Cat and Dragon', 3, 23, 'https://i.imgflip.com/6ovxnp.jpg','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(11,'Interception, Commence!', 4, 23, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqrEi8vXOoFk7HomV3wi3TW8fV2fVtOp9n2Q&usqp=CAU','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(12,'Holiness Behind the Gym', 1, 23, 'https://preview.redd.it/u3q5x41167i11.png?width=640&crop=smart&auto=webp&s=a3d4b7e3089d966b4ba577e88a1a9aa7999e33cd','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(12,'That is Right, Lets go to Kyoto', 2, 23, 'https://w7.pngwing.com/pngs/157/238/png-transparent-guts-griffith-casca-berserk-anime-others-manga-fictional-character-meme.png','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(12,'School Trip, an Abrupt Attack', 3, 23, 'https://tse1.explicit.bing.net/th?id=OVP.pSjWGvqQYUAP13ul5tVnYgHgFo&w=268&h=150&c=7&rs=1&qlt=90&o=5&dpr=1.25&pid=2.1','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB'),
+(12,'The Party of Heroes', 4, 23, 'https://hips.hearstapps.com/digitalspyuk.cdnds.net/18/21/1527176624-screen-shot-2018-05-24-at-164005.jpg?resize=480:*','https://gogohd.net/streaming.php?id=MjUwNTQ=&title=Naruto+Episode+1&typesub=SUB')
+
+
 -- KHOA
 insert into shows (title, description, imageUrl, releaseDate, genre, rating) values ('Rent a girlfriend', 'After being dumped by his girlfriend, a college student enlists a dating service to "rent" a girlfriend who, unbeknownst to him, happens to be both a fellow student and his neighbor.', 'https://m.media-amazon.com/images/M/MV5BMmFlNGVkYmUtOGJiZi00NjM3LTk4NGEtNGJiNGVhNWQ5NWIxXkEyXkFqcGdeQXVyMzgxODM4NjM@._V1_.jpg', '2020', 'Comedy', 3);
 insert into shows (title, description, imageUrl, releaseDate, genre, rating) values ('Hunter X Hunter', 'Gon Freecss aspires to become a Hunter, an exceptional being capable of greatness. With his friends and his potential, he seeks out his father, who left him when he was younger.', 'https://m.media-amazon.com/images/M/MV5BNGM0YTk3MWEtN2JlZC00ZmZmLWIwMDktZTMxZGE5Zjc2MGExXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg', '2011', 'Action', 5);
@@ -131,6 +191,17 @@ insert into shows (title, description, imageUrl, releaseDate, genre, rating) val
 insert into shows (title, description, imageUrl, releaseDate, genre, rating) values ('Redo of healer', 'Keyaru is a healing magician who is sexually abused repeatedly by others. Using his healing magic, he goes back four years into the past to get revenge on the ones who abused him.', 'https://m.media-amazon.com/images/M/MV5BZDg5OTgzNTEtMDJmOS00MWMzLWFmYmQtNTNlZjg5YjI1YjRiXkEyXkFqcGdeQXVyMzgxODM4NjM@._V1_.jpg', '2020', 'Action', 4);
 insert into shows (title, description, imageUrl, releaseDate, genre, rating) values ('Tower of god', 'Reach the top, and everything will be yours. At the top of the tower exists everything in this world, and all of it can be yours.', 'https://m.media-amazon.com/images/M/MV5BZGM4NjE1OWYtNzcwMC00ZGY0LWE4NjEtZTgzYzY4YWU5M2E3XkEyXkFqcGdeQXVyMzI2Mjc1NjQ@._V1_FMjpg_UX1000_.jpg', '2021', 'Action', 2);
 
+insert into seasons (showId, title, description, imageUrl,releaseDate)
+values
+(7, 'Rent a girlfriend season 1', 'After being dumped by his girlfriend, a college student enlists a dating service to "rent" a girlfriend who, unbeknownst to him, happens to be both a fellow student and his neighbor.', 'https://gogoanime.run/images/625ddd823832ef0015c4b0e3.png', '2020'),
+(7, 'Rent a girlfriend season 2', 'Second season of Kanojo, Okarishimasu.', 'https://gogoanime.run/images/625ddd8d3832ef0015c4b0ef.png', '2022'),
+(8, 'Hunter x Hunter season 1', 'Gon Freecss aspires to become a Hunter, an exceptional being capable of greatness. With his friends and his potential, he seeks out his father, who left him when he was younger.', 'https://gogoanime.run/images/625d7f1c3537ea0015362c9d.jpg','2011'),
+(8, 'Hunter x Hunter season 2', 'Second season of Hunter X Hunter.', 'https://gogoanime.run/images/625d7f1c3537ea0015362c9d.jpg','2011'),
+(9, 'One Piece season 1', 'One Piece: East Blue', 'https://gogocdn.net/images/anime/One-piece.jpg', '1999'),
+(9, 'One Piece season 2', 'One Piece: Alabasta', 'https://gogocdn.net/images/anime/One-piece.jpg', '2000'),
+(9, 'One Piece season 3', 'One Piece: Sky Island', 'https://gogocdn.net/images/anime/One-piece.jpg', '2001'),
+(10, 'Redo of healer', 'Keyaru is a healing magician who is sexually abused repeatedly by others. Using his healing magic, he goes back four years into the past to get revenge on the ones who abused him.', 'https://m.media-amazon.com/images/M/MV5BZDg5OTgzNTEtMDJmOS00MWMzLWFmYmQtNTNlZjg5YjI1YjRiXkEyXkFqcGdeQXVyMzgxODM4NjM@._V1_.jpg', '2021'),
+(11, 'Tower of god', 'Reach the top, and everything will be yours. At the top of the tower exists everything in this world, and all of it can be yours.', 'https://gogocdn.net/cover/kami-no-tou.png', '2020');
 
 
 
