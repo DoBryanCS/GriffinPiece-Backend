@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
-const request = require('../database/shows');
+const request = require('../database/request');
 
 
 id = 0
+
 app.get(`/season/${id}`, async (req, res) => {
     try {
         const resultat = await request.getSeasons(id)
