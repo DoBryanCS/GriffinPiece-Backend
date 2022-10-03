@@ -16,9 +16,25 @@ function getSeasons(id) {
 		.where('id', id).select();
 }
 
+function getEpisodes(id) {
+	return knex('episodes').select().where('id', id)
+}
+
+function getComments(id) {
+	return knex('comments').select().where('id', id)
+}
+
+function getHistory() {
+	return knex('history').select()
+}
+
+
 module.exports = {
 	getShowById,
 	getShows,
     getSeasons,
+	getEpisodes,
+	getComments,
+	getHistory,
 };
 

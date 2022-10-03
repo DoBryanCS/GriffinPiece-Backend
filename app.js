@@ -47,7 +47,6 @@ app.get('/shows', async (req, res) => {
         if(resultat.length!=0)
 		{   
 			console.log(resultat);
-            console.log(id);
 			res.send(resultat);
 		} else {
 			res.send({result : 'error'});
@@ -75,6 +74,57 @@ app.get('/season/:id', async (req, res) => {
 	}
 });
 
+app.get('/episode/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        const resultat = await request.getEpisodes(id)
+
+        if(resultat.length!=0)
+		{   
+			console.log(resultat);
+            console.log(id);
+			res.send(resultat);
+		} else {
+			res.send({result : 'error'});
+		}
+	} catch (error) {
+		res.status(500).json(error.message);
+	}
+});
+
+app.get('/comments/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        const resultat = await request.getComments(id)
+
+        if(resultat.length!=0)
+		{   
+			console.log(resultat);
+            console.log(id);
+			res.send(resultat);
+		} else {
+			res.send({result : 'error'});
+		}
+	} catch (error) {
+		res.status(500).json(error.message);
+	}
+});
+
+app.get('/history', async (req, res) => {
+    try {
+        const resultat = await request.getHistory()
+
+        if(resultat.length!=0)
+		{   
+			console.log(resultat);
+			res.send(resultat);
+		} else {
+			res.send({result : 'error'});
+		}
+	} catch (error) {
+		res.status(500).json(error.message);
+	}
+});
 
 app.use("/", swaggerUi.serve, swaggerUi.setup(apiJSON));
 
