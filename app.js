@@ -6,6 +6,9 @@ const swaggerUi = require('swagger-ui-express');
 const app = express();
 const cors = require('cors');
 
+const request = require('../backend/database/shows');
+
+
 const PORT = process.env.PORT || 3000;
 const authRouteur = require('./routes/auth');
 
@@ -16,9 +19,29 @@ app.use(express.json());
 app.use('/auth', authRouteur);
 
 
+
+
+
+app.get('/season/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        const resultat = await request.getSeasons(id)
+
+        if(resultat.length!=0)
+		{   
+			console.log(resultat);
+            console.log(id);
+			res.send(resultat);
+		} else {
+			res.send({result : 'error'});
+		}
+	} catch (error) {
+		res.status(500).json(error.message);
+	}
+});
+
+
 app.use("/", swaggerUi.serve, swaggerUi.setup(apiJSON));
-
-
 
 app.listen(PORT, () => {
     console.log(`Mon application roule sur http://localhost:${PORT}`);
