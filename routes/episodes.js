@@ -2,15 +2,15 @@ const express = require('express');
 const router = express.Router();
 const request = require('../database/request');
 
-router.get('/:id', async (req, res) => {
+router.get('/:seasonId', async (req, res) => {
     try {
-        const id = req.params.id
-        const resultat = await request.getEpisode(id)
+        const seasonId = req.params.seasonId
+        const resultat = await request.getEpisodes(seasonId)
 
         if(resultat.length!=0)
 		{   
 			console.log(resultat);
-            console.log(id);
+            console.log(seasonId);
 			res.send(resultat);
 		} else {
 			res.send({result : 'error'});

@@ -1,17 +1,17 @@
 const express = require('express');
-const app = express();
+const router = express.Router();
 const request = require('../database/request');
 
 
-id = 0
-
-app.get(`/season/${id}`, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
-        const resultat = await request.getSeasons(id)
+        const id = req.params.id
+        const resultat = await request.getSeason(id)
 
         if(resultat.length!=0)
 		{   
 			console.log(resultat);
+            console.log(id);
 			res.send(resultat);
 		} else {
 			res.send({result : 'error'});
@@ -20,3 +20,5 @@ app.get(`/season/${id}`, async (req, res) => {
 		res.status(500).json(error.message);
 	}
 });
+
+module.exports = router;

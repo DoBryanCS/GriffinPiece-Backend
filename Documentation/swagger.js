@@ -564,7 +564,7 @@ const swaggerDocument = {
                 }
             }
         },
-        "/shows": {
+        "/show": {
             "get": {
                 tags: ["Shows"],
                 summary: "Get all shows",
