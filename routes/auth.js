@@ -19,23 +19,23 @@ router.post('/login', async (req, res) => {
 
         // TODO ENCRYPTER LE MOT DE PASSE
         // const passwordCorrect = await bcrypt.compare(password, user[0].password);
-        const passwordCorrect = password === user[0].password;
+        const passwordCorrect = password === user.password;
 
         if (!passwordCorrect) {
             return res.status(401).json({ succes: false, message: 'Le mot de passe est incorrect' });
         }
 
         const AUTH_TOKEN = generateToken.generateToken('1d', {
-            id: user[0].id,
-            username: user[0].username,
-            isAdmin: user[0].isAdmin,
+            id: user.id,
+            username: user.username,
+            isAdmin: user.isAdmin,
         });
 
         return res.status(200).json({ 
             succes: true, 
             message: 'L\'utilisateur est connecté', 
             token: AUTH_TOKEN, 
-            username: user[0].username
+            username: user.username
         });
     }
     catch (error) {
@@ -50,8 +50,7 @@ router.post('/register', async (req, res) => {
         const { email, password, username } = req.body;
 
         const user = await knex.trouverUtilisateur(email);
-
-        if (user.length !== 0) {
+        if (user != undefined) {
             return res.status(409).json({ succes: false, message: 'L\'utilisateur existe deja' });
         }
 

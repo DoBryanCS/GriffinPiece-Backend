@@ -52,7 +52,7 @@ create table history (
     id integer IDENTITY(1,1) PRIMARY KEY,
     userId integer not null,
     episodeId integer not null,
-    date date not null,
+    date nvarchar(50) not null,
     foreign key (userId) references users(id),
     foreign key (episodeId) references episodes(id)
 );
@@ -104,7 +104,7 @@ insert into comments (userId, episodeId, comment) values (1, 1, 'This is a comme
 insert into favorite (userId, showId) values (1, 1);
 
 
-insert into history (userId, episodeId, date) values (1, 2, '03/10/2022');
+insert into history (userId, episodeId, date) values (1, 2, '2022-10-04T17:45:31.580Z');
 
 
 -- MATHIEU

@@ -42,10 +42,29 @@ function getComments(id) {
 }
 
 // HISTORY
-function getHistory() {
-	return knex('history');
+function getHistory(userId) {
+	return knex('history').where("userId", userId);
 }
 
+async function insertToHistory(userId, episodeId, date) {
+	await knex('history').insert({
+		userId: userId,
+		episodeId: episodeId,
+		date: date
+	})
+}
+
+// USER
+
+function getUser(id) {
+	return knex('users').where('id', id).first();
+}
+
+async function modifyUserEmail(id, newEmail) {
+	return await knex('users')
+	.where('id', id)
+	.update({email : newEmail})
+}
 
 module.exports = {
 	getShowById,
@@ -56,5 +75,8 @@ module.exports = {
 	getEpisodes,
 	getComments,
 	getHistory,
+	insertToHistory,
+	getUser,
+	modifyUserEmail
 };
 

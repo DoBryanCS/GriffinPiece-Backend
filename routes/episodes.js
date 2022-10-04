@@ -9,8 +9,6 @@ router.get('/:seasonId', async (req, res) => {
 
         if(resultat.length!=0)
 		{   
-			console.log(resultat);
-            console.log(seasonId);
 			res.send(resultat);
 		} else {
 			res.send({result : 'error'});

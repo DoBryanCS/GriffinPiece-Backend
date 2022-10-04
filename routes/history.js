@@ -5,15 +5,11 @@ const request = require('../database/request');
 
 router.get('/', async (req, res) => {
     try {
-        const resultat = await request.getHistory()
+        const userId = req.infoUser.id;
+        const resultat = await request.getHistory(userId)
 
-        if(resultat.length!=0)
-		{   
-			console.log(resultat);
-			res.send(resultat);
-		} else {
-			res.send({result : 'error'});
-		}
+        res.send(resultat);
+
 	} catch (error) {
 		res.status(500).json(error.message);
 	}

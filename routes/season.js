@@ -10,8 +10,6 @@ router.get('/:id', async (req, res) => {
 
         if(resultat.length!=0)
 		{   
-			console.log(resultat);
-            console.log(id);
 			res.send(resultat);
 		} else {
 			res.send({result : 'error'});

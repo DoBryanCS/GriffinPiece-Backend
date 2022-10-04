@@ -4,14 +4,18 @@ const request = require('../database/request');
 
 router.get('/:id', async (req, res) => {
     try {
-        const id = req.params.id
-        const resultat = await request.getEpisode(id)
+        const id = req.params.id;
+        const userId = req.infoUser.id;
+        const date = new Date().toISOString()
+        const resultat = await request.getEpisode(id);
 
         if(resultat.length!=0)
 		{   
-			console.log(resultat);
-            console.log(id);
+
+
+            await request.insertToHistory(userId, id, date)
 			res.send(resultat);
+
 		} else {
 			res.send({result : 'error'});
 		}

@@ -8,7 +8,6 @@ router.get('/', async (req, res) => {
 
         if(resultat.length!=0)
 		{   
-			console.log(resultat);
 			res.send(resultat);
 		} else {
 			res.send({result : 'error'});
@@ -25,8 +24,6 @@ router.get('/:id', async (req, res) => {
 
         if(resultat.length!=0)
 		{   
-			console.log(resultat);
-            console.log(id);
 			res.send(resultat);
 		} else {
 			res.send({result : 'error'});
