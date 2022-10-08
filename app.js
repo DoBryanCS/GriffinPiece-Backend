@@ -1,4 +1,6 @@
 const express = require('express');
+require('dotenv').config();
+
 
 const apiJSON = require('./Documentation/swagger');
 const swaggerUi = require('swagger-ui-express');
@@ -7,7 +9,7 @@ const app = express();
 const cors = require('cors');
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 const authRouteur = require('./routes/auth');
 const showRouteur = require('./routes/show');
