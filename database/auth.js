@@ -8,6 +8,8 @@ async function getUtilisateursAll() { return await knex('users'); };
 
 async function trouverUtilisateur(email) { return await knex('users').where('email', email).first(); }
 
+async function trouverUtilisateurUsername(username) { return await knex('users').where('username', username).first(); }
+
 async function ajouterUtilisateur(email, password, username) {
     return await knex('users').insert({ email, password, username, isAdmin:0 });
 }
@@ -15,5 +17,6 @@ async function ajouterUtilisateur(email, password, username) {
 module.exports = {
     getUtilisateursAll,
     trouverUtilisateur,
+    trouverUtilisateurUsername,
     ajouterUtilisateur
 };

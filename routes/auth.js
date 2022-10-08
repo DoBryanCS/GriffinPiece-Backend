@@ -13,14 +13,12 @@ router.post('/login', async (req, res) => {
 
         const user = await knex.trouverUtilisateur(email);
 
-        if (user.length === 0) {
+        if (user == undefined) {
             return res.status(401).json({ succes: false, message: 'L\'utilisateur n\'existe pas' });
         }
 
-        // TODO ENCRYPTER LE MOT DE PASSE
-        // const passwordCorrect = await bcrypt.compare(password, user[0].password);
-        const passwordCorrect = password === user.password;
-
+        const passwordCorrect = await bcrypt.compare(password, user.password);
+        
         if (!passwordCorrect) {
             return res.status(401).json({ succes: false, message: 'Le mot de passe est incorrect' });
         }
@@ -48,20 +46,22 @@ router.post('/register', async (req, res) => {
 
     try {
         const { email, password, username } = req.body;
+        const passwordHash = await bcrypt.hash(password, 10);
 
         const user = await knex.trouverUtilisateur(email);
         if (user != undefined) {
-            return res.status(409).json({ succes: false, message: 'L\'utilisateur existe deja' });
-        }
+            return res.status(409).json({ succes: false, message: 'Le email de l\'utilisateur existe deja' });
+        };
 
-        // TODO ENCRYPTER LE MOT DE PASSE
-        // const passwordCorrect = await bcrypt.compare(password, user[0].password);
-        // const passwordCorrect = password === user[0].password;
-        
-        const newPassword = password;        
+        const userUsername = await knex.trouverUtilisateurUsername(username);
+        if (userUsername != undefined) {
+            return res.status(409).json({ succes: false, message: 'Le username existe deja' });
+        };
+
+   
 
 
-        await knex.ajouterUtilisateur(email, newPassword, username);
+        await knex.ajouterUtilisateur(email, passwordHash, username);
 
         return res.status(200).json({ 
             succes: true, 
