@@ -41,6 +41,11 @@ function getComments(id) {
 	return knex('comments').where('episodeId', id);
 }
 
+// COMMENTS
+function postComments(id) {
+	return knex('comments').where('episodeId', id);
+}
+
 // HISTORY
 function getHistory(userId) {
 	return knex('history').where("userId", userId);

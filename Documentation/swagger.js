@@ -204,6 +204,51 @@ const swaggerDocument = {
                     }
                 }
             },
+            "get": {
+                tags: ['User'],
+                summary: "get info about current User",
+                description: "get info about current User",
+                security: [
+                    {
+                        bearerAuth: []
+                    }
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/401"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        description: "Not Found",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/404"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            },
         },
         // "/user/{Id}": {
         //     "delete": {
@@ -858,6 +903,27 @@ const swaggerDocument = {
                     rating: {
                         type: "integer",
                         example: "4"
+                    },
+                }
+            },
+            User: {
+                type: "object",
+                properties: {
+                    id: {
+                        type: "integer",
+                        example: 1
+                    },
+                    username: {
+                        type: "string",
+                        example: "tekam"
+                    },
+                    email: {
+                        type: "string",
+                        example: "tekam@gmail.com"
+                    },
+                    isAdmin: {
+                        type: "integer",
+                        example: 0
                     },
                 }
             },

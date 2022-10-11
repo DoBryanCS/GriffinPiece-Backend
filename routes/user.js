@@ -2,6 +2,25 @@ const express = require('express');
 const router = express.Router();
 const request = require('../database/request');
 
+router.get('/', async (req, res) => {
+    try {
+        const userId = req.infoUser.id
+        const user = await request.getUser(userId);
+
+        const response = {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            isAdmin: user.isAdmin,
+        };
+
+        res.json(response);
+        
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 
 router.put('/', async (req, res) => {
     try {
