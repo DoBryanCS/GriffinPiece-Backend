@@ -71,6 +71,38 @@ async function modifyUserEmail(id, newEmail) {
 	.update({email : newEmail})
 }
 
+
+// FAVORITES
+
+async function getFavorites(userId) {
+	// return shows that are joined with favorites
+	return await knex('shows')
+	.join('favorite', 'shows.id', '=', 'favorite.showId')
+	.where('favorite.userId', userId)
+	.select(
+	'shows.id',
+	'shows.title',
+	'shows.imageUrl');
+}
+
+async function getFavorite(userId, showId) {
+	return await knex('favorite').where('userId', userId).andWhere('showId', showId).first();
+}
+
+async function addFavorite(userId, showId) {
+	return await knex('favorite').insert({
+		userId: userId,
+		showId: showId
+	})
+}
+
+async function deleteFavorite(userId, showId) {
+	return await knex('favorite')
+	.where('userId', userId)
+	.andWhere('showId', showId)
+	.del();
+}
+
 module.exports = {
 	getShowById,
 	getShows,
@@ -82,6 +114,10 @@ module.exports = {
 	getHistory,
 	insertToHistory,
 	getUser,
-	modifyUserEmail
+	modifyUserEmail,
+	getFavorites,
+	getFavorite,
+	addFavorite,
+	deleteFavorite
 };
 

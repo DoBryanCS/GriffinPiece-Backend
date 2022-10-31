@@ -20,6 +20,9 @@ const episodesRouteur = require('./routes/episodes');
 const historyRouteur = require('./routes/history');
 const commentsRouteur = require('./routes/comments');
 const userRouteur = require('./routes/user');
+const favoriteRouteur = require('./routes/favorite');
+const favoritesRouteur = require('./routes/favorites');
+
 const authMiddleware = require('./modules/authMiddleware');
 
 
@@ -35,6 +38,8 @@ app.use('/episodes', episodesRouteur);
 app.use('/history', authMiddleware, historyRouteur);
 app.use('/comments', commentsRouteur);
 app.use('/user', authMiddleware, userRouteur)
+app.use('/favorite', authMiddleware, favoriteRouteur)
+app.use('/favorites', authMiddleware, favoritesRouteur)
 
 
 app.use("/", swaggerUi.serve, swaggerUi.setup(apiJSON));

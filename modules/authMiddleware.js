@@ -11,7 +11,7 @@ function authMiddleware(req, res, next) {
     jwt.verify(token, process.env.SECRET_KEY, (error, infoUser) => {
         if (error) return res.status(403).json({ succes: false, message: 'Le token pris en compte n\'est pas valide' });
 
-        console.log(`${infoUser.id}`)
+        // console.log(`${infoUser.id}`)
 
         req.infoUser = infoUser;
 
