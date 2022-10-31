@@ -767,7 +767,202 @@ const swaggerDocument = {
                     }
                 }
             }
-        }
+        },
+        "/favorite": {
+            "get": {
+                tags: ["Favorite"],
+                summary: "Get if show is favorite",
+                description: "Get if the user has added the show to his favorite",
+                security: [
+                    {
+                        bearerAuth: []
+                    },
+                ],
+                parameters: [
+                    {
+                        name: "showId",
+                        in: "query",
+                        description: "Le id du show",
+                        required: true,
+                        type: "int",
+                        example: 4
+                    }
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+                                    properties: {
+                                        isFavorite: {
+                                            type: "boolean",
+                                            example: "true"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/401"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            },
+            "post": {
+                tags: ["Favorite"],
+                summary: "add the show to favorites",
+                description: "Add the show to favorites",
+                security: [
+                    {
+                        bearerAuth: []
+                    },
+                ],
+                parameters: [
+                    {
+                        name: "showId",
+                        in: "query",
+                        description: "Le id du show",
+                        required: true,
+                        type: "int",
+                        example: 4
+                    }
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+                                    properties: {
+                                        success: {
+                                            type: "boolean",
+                                            example: "true"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/401"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                tags: ["Favorite"],
+                summary: "delete the show from favorites",
+                description: "Delete the show from favorites",
+                security: [
+                    {
+                        bearerAuth: []
+                    },
+                ],
+                parameters: [
+                    {
+                        name: "showId",
+                        in: "query",
+                        description: "Le id du show",
+                        required: true,
+                        type: "int",
+                        example: 4
+                    }
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+                                    properties: {
+                                        success: {
+                                            type: "boolean",
+                                            example: "true"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/401"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            },
+        },
+        "/favorites": {
+            "get": {
+                tags: ["Favorite"],
+                summary: "Get favorites of a user",
+                description: "Get the favorites of a user",
+                security: [
+                    {
+                        bearerAuth: []
+                    },
+                ],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "array",
+                                    items: {
+                                        $ref: "#/components/schemas/Favorite"
+                                    },
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/401"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            },
+        },            
     },
     components: {
         securitySchemes: {
@@ -904,6 +1099,23 @@ const swaggerDocument = {
                         type: "integer",
                         example: "4"
                     },
+                }
+            },
+            Favorite: {
+                type: "object",
+                properties: {
+                    id: {
+                        type: "integer",
+                        example: 1
+                    },
+                    title: {
+                        type: "string",
+                        example: "East Blue"
+                    },
+                    imageURL: {
+                        type: "string",
+                        example: "https://images.justwatch.com/poster/248497985/s718/one-piece.%7Bformat%7D"
+                    }
                 }
             },
             User: {

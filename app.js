@@ -41,6 +41,10 @@ app.use('/user', authMiddleware, userRouteur)
 app.use('/favorite', authMiddleware, favoriteRouteur)
 app.use('/favorites', authMiddleware, favoritesRouteur)
 
+app.use('/insomnia', function(req, res) {
+    res.sendFile(__dirname + '/Documentation/insomnia.json');
+});
+
 
 app.use("/", swaggerUi.serve, swaggerUi.setup(apiJSON));
 
