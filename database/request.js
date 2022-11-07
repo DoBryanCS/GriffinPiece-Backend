@@ -14,11 +14,18 @@ function getShows() {
 
 // SEASONS
 function getSeasons(showId) {
-    return knex('seasons').where('showId', showId);
+    return knex('seasons')
+    .where('showId', showId)
+    .join('shows', 'seasons.showId', '=', 'shows.id')
+    .select('seasons.id', 'seasons.showId', 'seasons.title', 'seasons.description', 'seasons.imageUrl', 'seasons.releaseDate', 'shows.title as showTitle');
 }
 
 function getSeason(id) {
-    return knex('seasons').where('id', id).first();
+    return knex('seasons')
+    .where('seasons.id', id)
+    .join('shows', 'seasons.showId', '=', 'shows.id')
+    .select('seasons.id', 'seasons.showId', 'seasons.title', 'seasons.description', 'seasons.imageUrl', 'seasons.releaseDate', 'shows.title as showTitle')
+    .first();
 }
 
 // EPISODES
