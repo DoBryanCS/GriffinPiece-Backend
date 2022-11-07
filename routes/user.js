@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const request = require('../database/request');
 const bcrypt = require('bcrypt');
+const knex = require('../database/auth');
 
 router.get('/', async(req, res) => {
     try {
@@ -66,4 +67,27 @@ router.put('/password', async(req, res) => {
     }
 });
 
+router.post('/checkPassword', async(req, res) => {
+
+    try {
+        const { password } = req.body;
+        
+        const userId = req.infoUser.id
+        
+        const user = await knex.trouverUtilisateurId(userId);
+
+        const passwordCorrect = await bcrypt.compare(password, user.password);
+
+        if (!passwordCorrect) {
+            return res.status(401).json({ succes: false, message: 'Le mot de passe est incorrect' });
+        }
+
+        return res.status(200).json({
+            succes: true,
+            message: 'Le mot de passe est correct',
+        });
+    } catch (error) {
+        res.status(500).json({ succes: false, message: error.message });
+    }
+});
 module.exports = router;

@@ -292,6 +292,64 @@ const swaggerDocument = {
                 }
             },
         },
+        "/user/checkPassword": {
+            "post": {
+                tags: ['User'],
+                summary: "check if password is correct",
+                description: "Permet de check le password d'un user",
+                security: [{
+                    bearerAuth: []
+                }],
+                parameters: [{
+                    name: "password",
+                    in: "body",
+                    schema: {
+                        type: "object",
+                        properties: {
+                            password: {
+                                type: "string",
+                                example: "testtesttest"
+                            },
+                        }
+                    }
+                }],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/200"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/401"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        description: "Not Found",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/404"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            },
+        },
         // "/user/{Id}": {
         //     "delete": {
         //         tags: ['User'],

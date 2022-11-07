@@ -5,7 +5,7 @@ const knex = require('../database/auth');
 
 const router = express.Router();
 
-router.post('/login', async (req, res) => {
+router.post('/login', async(req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
 
     try {
@@ -18,7 +18,7 @@ router.post('/login', async (req, res) => {
         }
 
         const passwordCorrect = await bcrypt.compare(password, user.password);
-        
+
         if (!passwordCorrect) {
             return res.status(401).json({ succes: false, message: 'Le mot de passe est incorrect' });
         }
@@ -29,19 +29,18 @@ router.post('/login', async (req, res) => {
             isAdmin: user.isAdmin,
         });
 
-        return res.status(200).json({ 
-            succes: true, 
-            message: 'L\'utilisateur est connecté', 
-            token: AUTH_TOKEN, 
+        return res.status(200).json({
+            succes: true,
+            message: 'L\'utilisateur est connecté',
+            token: AUTH_TOKEN,
             username: user.username
         });
-    }
-    catch (error) {
+    } catch (error) {
         res.status(500).json({ succes: false, message: error.message });
     }
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', async(req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
 
     try {
@@ -58,20 +57,20 @@ router.post('/register', async (req, res) => {
             return res.status(409).json({ succes: false, message: 'Le username existe deja' });
         };
 
-   
+
 
 
         await knex.ajouterUtilisateur(email, passwordHash, username);
 
-        return res.status(200).json({ 
-            succes: true, 
-            message: 'L\'utilisateur est créé', 
+        return res.status(200).json({
+            succes: true,
+            message: 'L\'utilisateur est créé',
             email: email
         });
-    }
-    catch (error) {
+    } catch (error) {
         res.status(500).json({ succes: false, message: error.message });
     }
 });
+
 
 module.exports = router;

@@ -11,12 +11,17 @@ async function trouverUtilisateur(email) { return await knex('users').where('ema
 async function trouverUtilisateurUsername(username) { return await knex('users').where('username', username).first(); }
 
 async function ajouterUtilisateur(email, password, username) {
-    return await knex('users').insert({ email, password, username, isAdmin:0 });
+    return await knex('users').insert({ email, password, username, isAdmin: 0 });
+}
+
+async function trouverUtilisateurId(id) {
+    return await knex('users').where('id', id).first();
 }
 
 module.exports = {
     getUtilisateursAll,
     trouverUtilisateur,
     trouverUtilisateurUsername,
-    ajouterUtilisateur
+    ajouterUtilisateur,
+    trouverUtilisateurId
 };
