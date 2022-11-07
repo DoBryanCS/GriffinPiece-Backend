@@ -12,11 +12,11 @@ const swaggerDocument = {
         { name: 'Authentification' },
         { name: 'User' },
         { name: 'Shows' },
-        { name: 'Seasons'},
-        { name: 'Episodes'},
-        { name: 'Comments'},
-        { name: 'History'},
-        { name: 'Favorites'},
+        { name: 'Seasons' },
+        { name: 'Episodes' },
+        { name: 'Comments' },
+        { name: 'History' },
+        { name: 'Favorites' },
     ],
     paths: {
         "/auth/login": {
@@ -24,25 +24,23 @@ const swaggerDocument = {
                 tags: ["Authentification"],
                 summary: "Get Token",
                 description: "Authentification",
-                parameters: [
-                    {
-                        name: "login",
-                        in: "body",
-                        schema: {
-                            type: "object",
-                            properties: {
-                                email: {
-                                    type: "string",
-                                    example: "e12345678@cmaisonneuve.qc.ca"
-                                },
-                                password: {
-                                    type: "string",
-                                    example: "password"
-                                }
+                parameters: [{
+                    name: "login",
+                    in: "body",
+                    schema: {
+                        type: "object",
+                        properties: {
+                            email: {
+                                type: "string",
+                                example: "e12345678@cmaisonneuve.qc.ca"
+                            },
+                            password: {
+                                type: "string",
+                                example: "password"
                             }
                         }
                     }
-                ],
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -87,29 +85,27 @@ const swaggerDocument = {
                 tags: ["Authentification"],
                 summary: "Create User",
                 description: "Authentification",
-                parameters: [
-                    {
-                        name: "register",
-                        in: "body",
-                        schema: {
-                            type: "object",
-                            properties: {
-                                email: {
-                                    type: "string",
-                                    example: "e12345678@cmaisonneuve.qc.ca"
-                                },
-                                password: {
-                                    type: "string",
-                                    example: "password"
-                                },
-                                username: {
-                                    type: "string",
-                                    example: "username"
-                                }
+                parameters: [{
+                    name: "register",
+                    in: "body",
+                    schema: {
+                        type: "object",
+                        properties: {
+                            email: {
+                                type: "string",
+                                example: "e12345678@cmaisonneuve.qc.ca"
+                            },
+                            password: {
+                                type: "string",
+                                example: "password"
+                            },
+                            username: {
+                                type: "string",
+                                example: "username"
                             }
                         }
                     }
-                ],
+                }],
                 responses: {
                     "201": {
                         description: "successful operation",
@@ -136,38 +132,71 @@ const swaggerDocument = {
             }
         },
         "/user": {
+            "get": {
+                tags: ['User'],
+                summary: "get info about current User",
+                description: "get info about current User",
+                security: [{
+                    bearerAuth: []
+                }],
+                responses: {
+                    "200": {
+                        description: "successful operation",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        description: "Unauthorized",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/401"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        description: "Not Found",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/404"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        description: "Internal Server Error"
+                    }
+                }
+            },
+        },
+        "/user/email": {
             "put": {
                 tags: ['User'],
                 summary: "Update current User",
                 description: "Permet de update un user",
-                security: [
-                    {
-                        bearerAuth: []
-                    }
-                ],
-                parameters: [
-                    {
-                        name: "newData",
-                        in: "body",
-                        schema: {
-                            type: "object",
-                            properties: {
-                                email: {
-                                    type: "string",
-                                    example: "e12345678@cmaisonneuve.qc.ca"
-                                },
-                                username: {
-                                    type: "string",
-                                    example: "username"
-                                },
-                                password: {
-                                    type: "string",
-                                    example: "password"
-                                }
-                            }
+                security: [{
+                    bearerAuth: []
+                }],
+                parameters: [{
+                    name: "newData",
+                    in: "body",
+                    schema: {
+                        type: "object",
+                        properties: {
+                            email: {
+                                type: "string",
+                                example: "e12345678@cmaisonneuve.qc.ca"
+                            },
                         }
                     }
-                ],
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -204,22 +233,35 @@ const swaggerDocument = {
                     }
                 }
             },
-            "get": {
+        },
+        "/user/password": {
+            "put": {
                 tags: ['User'],
-                summary: "get info about current User",
-                description: "get info about current User",
-                security: [
-                    {
-                        bearerAuth: []
+                summary: "Update current User",
+                description: "Permet de update un user",
+                security: [{
+                    bearerAuth: []
+                }],
+                parameters: [{
+                    name: "newData",
+                    in: "body",
+                    schema: {
+                        type: "object",
+                        properties: {
+                            password: {
+                                type: "string",
+                                example: "testtesttest"
+                            },
+                        }
                     }
-                ],
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
                         content: {
                             "application/json": {
                                 schema: {
-                                    $ref: "#/components/schemas/User"
+                                    $ref: "#/components/schemas/200"
                                 }
                             }
                         }
@@ -342,13 +384,10 @@ const swaggerDocument = {
                 tags: ['Comments'],
                 summary: "Create Comment",
                 description: "Permet de creer un commentaire",
-                security: [
-                    {
-                        bearerAuth: []
-                    }
-                ],
-                parameters: [
-                    {
+                security: [{
+                    bearerAuth: []
+                }],
+                parameters: [{
                         name: "episodeId",
                         in: "path",
                         description: "Le id de l'episode",
@@ -416,16 +455,14 @@ const swaggerDocument = {
                 tags: ['Comments'],
                 summary: "Get all Comment from episodeId",
                 description: "Permet de load des commentaire de un episode",
-                parameters: [
-                    {
-                        name: "episodeId",
-                        in: "path",
-                        description: "Le id de l'episode",
-                        required: true,
-                        type: "int",
-                        example: 3
-                    }
-                ],
+                parameters: [{
+                    name: "episodeId",
+                    in: "path",
+                    description: "Le id de l'episode",
+                    required: true,
+                    type: "int",
+                    example: 3
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -461,16 +498,14 @@ const swaggerDocument = {
                 tags: ["Shows"],
                 summary: "Get One show using it's ID",
                 description: "Allows to get the info of a show",
-                parameters: [
-                    {
-                        name: "Id",
-                        in: "path",
-                        description: "Le id du show",
-                        required: true,
-                        type: "int",
-                        example: 7
-                    }
-                ],
+                parameters: [{
+                    name: "Id",
+                    in: "path",
+                    description: "Le id du show",
+                    required: true,
+                    type: "int",
+                    example: 7
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -528,16 +563,14 @@ const swaggerDocument = {
                 tags: ["Seasons"],
                 summary: "Get season info",
                 description: "Allows to get the info of a season",
-                parameters: [
-                    {
-                        name: "seasonId",
-                        in: "path",
-                        description: "Le id de la season",
-                        required: true,
-                        type: "int",
-                        example: 4
-                    }
-                ],
+                parameters: [{
+                    name: "seasonId",
+                    in: "path",
+                    description: "Le id de la season",
+                    required: true,
+                    type: "int",
+                    example: 4
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -580,16 +613,14 @@ const swaggerDocument = {
                 tags: ["Seasons"],
                 summary: "Get seasons",
                 description: "Allows to get all seasons of a show",
-                parameters: [
-                    {
-                        name: "showId",
-                        in: "path",
-                        description: "Le id du show",
-                        required: true,
-                        type: "int",
-                        example: 4
-                    }
-                ],
+                parameters: [{
+                    name: "showId",
+                    in: "path",
+                    description: "Le id du show",
+                    required: true,
+                    type: "int",
+                    example: 4
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -635,21 +666,17 @@ const swaggerDocument = {
                 tags: ["Episodes"],
                 summary: "Get episode from id",
                 description: "Allows to get the detail of an episode from episodeId",
-                security: [
-                    {
-                        bearerAuth: []
-                    }
-                ],
-                parameters: [
-                    {
-                        name: "episodeId",
-                        in: "path",
-                        description: "Le id de l'episode",
-                        required: true,
-                        type: "int",
-                        example: 4
-                    }
-                ],
+                security: [{
+                    bearerAuth: []
+                }],
+                parameters: [{
+                    name: "episodeId",
+                    in: "path",
+                    description: "Le id de l'episode",
+                    required: true,
+                    type: "int",
+                    example: 4
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -688,16 +715,14 @@ const swaggerDocument = {
                 tags: ["Episodes"],
                 summary: "Get episode from season id",
                 description: "Allows to get episodes from the season id",
-                parameters: [
-                    {
-                        name: "episodeId",
-                        in: "path",
-                        description: "Le id de l'episode",
-                        required: true,
-                        type: "int",
-                        example: 4
-                    }
-                ],
+                parameters: [{
+                    name: "episodeId",
+                    in: "path",
+                    description: "Le id de l'episode",
+                    required: true,
+                    type: "int",
+                    example: 4
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -733,11 +758,9 @@ const swaggerDocument = {
                 tags: ["History"],
                 summary: "Get history",
                 description: "Get the history of the user",
-                security: [
-                    {
-                        bearerAuth: []
-                    },
-                ],
+                security: [{
+                    bearerAuth: []
+                }, ],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -773,21 +796,17 @@ const swaggerDocument = {
                 tags: ["Favorite"],
                 summary: "Get if show is favorite",
                 description: "Get if the user has added the show to his favorite",
-                security: [
-                    {
-                        bearerAuth: []
-                    },
-                ],
-                parameters: [
-                    {
-                        name: "showId",
-                        in: "query",
-                        description: "Le id du show",
-                        required: true,
-                        type: "int",
-                        example: 4
-                    }
-                ],
+                security: [{
+                    bearerAuth: []
+                }, ],
+                parameters: [{
+                    name: "showId",
+                    in: "query",
+                    description: "Le id du show",
+                    required: true,
+                    type: "int",
+                    example: 4
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -824,21 +843,17 @@ const swaggerDocument = {
                 tags: ["Favorite"],
                 summary: "add the show to favorites",
                 description: "Add the show to favorites",
-                security: [
-                    {
-                        bearerAuth: []
-                    },
-                ],
-                parameters: [
-                    {
-                        name: "showId",
-                        in: "query",
-                        description: "Le id du show",
-                        required: true,
-                        type: "int",
-                        example: 4
-                    }
-                ],
+                security: [{
+                    bearerAuth: []
+                }, ],
+                parameters: [{
+                    name: "showId",
+                    in: "query",
+                    description: "Le id du show",
+                    required: true,
+                    type: "int",
+                    example: 4
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -875,21 +890,17 @@ const swaggerDocument = {
                 tags: ["Favorite"],
                 summary: "delete the show from favorites",
                 description: "Delete the show from favorites",
-                security: [
-                    {
-                        bearerAuth: []
-                    },
-                ],
-                parameters: [
-                    {
-                        name: "showId",
-                        in: "query",
-                        description: "Le id du show",
-                        required: true,
-                        type: "int",
-                        example: 4
-                    }
-                ],
+                security: [{
+                    bearerAuth: []
+                }, ],
+                parameters: [{
+                    name: "showId",
+                    in: "query",
+                    description: "Le id du show",
+                    required: true,
+                    type: "int",
+                    example: 4
+                }],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -928,11 +939,9 @@ const swaggerDocument = {
                 tags: ["Favorite"],
                 summary: "Get favorites of a user",
                 description: "Get the favorites of a user",
-                security: [
-                    {
-                        bearerAuth: []
-                    },
-                ],
+                security: [{
+                    bearerAuth: []
+                }, ],
                 responses: {
                     "200": {
                         description: "successful operation",
@@ -962,7 +971,7 @@ const swaggerDocument = {
                     }
                 }
             },
-        },            
+        },
     },
     components: {
         securitySchemes: {
@@ -996,7 +1005,7 @@ const swaggerDocument = {
                         type: "string",
                         example: "I'm Luffy! The Man Who Will Become the Pirate King!"
                     },
-                    length: { 
+                    length: {
                         type: "int",
                         example: "20"
                     },
@@ -1029,7 +1038,7 @@ const swaggerDocument = {
                         type: "string",
                         example: "I'm Luffy! The Man Who Will Become the Pirate King!"
                     },
-                    length: { 
+                    length: {
                         type: "int",
                         example: "20"
                     },
@@ -1062,7 +1071,7 @@ const swaggerDocument = {
                         type: "string",
                         example: "https://m.media-amazon.com/images/M/MV5BZDQwMTYzN2EtNmFlOS00OTI1LWE5YmEtOTIyNGQwZjNiY2ZlXkEyXkFqcGdeQXVyMTEyNTc4NTI1._V1_.jpg"
                     },
-                    releaseDate : {
+                    releaseDate: {
                         type: "string",
                         example: "1999"
                     }
@@ -1139,7 +1148,7 @@ const swaggerDocument = {
                     },
                 }
             },
-            Comment:{
+            Comment: {
                 type: "object",
                 properties: {
                     commentId: {
@@ -1241,4 +1250,5 @@ const swaggerDocument = {
     }
 };
 
+module.exports = swaggerDocument;
 module.exports = swaggerDocument;
